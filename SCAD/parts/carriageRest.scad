@@ -1,5 +1,5 @@
 include<../modules/params.scad>;
-use<../parts/needleBed.scad>;
+use<../parts/needlebed.scad>;
 use<../parts/backCover.scad>;
 use<../parts/spongeBar.scad>;
 use<../modules/connector.scad>;

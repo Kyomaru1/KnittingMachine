@@ -76,7 +76,7 @@ union() {
 
 module needleBed() {
     for(i = [0:numNeedles-1]) {
-        if (i==screwPlacement || i==numNeedles-screwPlacement) {
+        if (i==screwPlacement || i==numNeedles-screwPlacement || (gauge>=BOND_GAUGE && i == (numNeedles-1)/2)) {
               translate([gauge*i, 0, 0]) {
               needleUnit(); 
               spongeBarSpacers();

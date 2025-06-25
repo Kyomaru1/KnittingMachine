@@ -42,6 +42,13 @@ module screwHoles(screw) {
           cylinder(h = screwHeadHeight*2 + tolerance, d = screwHeadDiamSm, center = true, $fn = 25);   
        }
      }
+     if(screw==0) {//middle screw for spongebar only
+        translate([-gauge/2,-(NEEDLE_BED_DEPTH-COMB) + SPONGE_BAR/2, 0]) {
+         cylinder(h = needleBedHeight*2 + 1, d = screwDiamSm, center = true, $fn = 25); 
+         translate([0,0,railHeight]) 
+             cylinder(h = screwHeadHeight*2 + tolerance, d = screwHeadDiamSm, center = true, $fn = 25);   
+       }
+     }
   
 }
 
@@ -52,10 +59,18 @@ module needleBedScrews() {
               translate([gauge*i, 0, 0]) {
               screwHoles(screw = -1); 
               }
-        } else if (i == screwPlacement - 1 || i==numNeedles-(screwPlacement + 1)) {
+        } 
+        else if (i == screwPlacement - 1 || i==numNeedles-(screwPlacement + 1)) {
             //LS screw holes
                 translate([gauge*i, 0, 0])
                 screwHoles(screw = 1);  
+        }
+        else if( gauge>=BOND_GAUGE && i == (numNeedles-1)/2){
+            //Middle screw hole for spongebar only,
+            //for proper pressure dispersment
+            translate([gauge*i,0,0]){
+                screwHoles(screw=0);
+            }
         }
     }
 }
